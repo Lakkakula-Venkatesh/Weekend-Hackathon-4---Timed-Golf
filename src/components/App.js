@@ -16,22 +16,22 @@ class Timer extends React.Component {
   componentDidMount() {
     document.addEventListener("keydown", this.handleKeyPress);
     setInterval(() => {
-      if(this.isOver()) {
+      if (this.isOver()) {
         return;
       }
       this.setState({ time: this.state.startGame ? this.state.time + 1 : 0 });
     }, 1000);
   }
   isOver() {
-    if(this.state.x === 250 && this.state.y === 250) {
-      this.setState({isGameOver: true});
+    if (this.state.x === 250 && this.state.y === 250) {
+      this.setState({ isGameOver: true });
       return true;
     }
     return false;
   }
   handleKeyPress(event) {
     // 37: left, 38: up, 39: right, 40: down
-    if(this.state.isGameOver) {
+    if (this.state.isGameOver) {
       return;
     }
     let { x, y } = this.state;
@@ -72,16 +72,14 @@ class Timer extends React.Component {
             Start
           </button>
         )}
-        {this.state.startGame && (
+        {
           <div
             className="ball"
             style={{ left: this.state.x, top: this.state.y }}
           ></div>
-        )}
-        {this.state.startGame && <div className="hole"></div>}
-        {this.state.startGame && (
-          <div className="heading-timer">{this.state.time}</div>
-        )}
+        }
+        {<div className="hole"></div>}
+        {<div className="heading-timer">{this.state.time}</div>}
       </>
     );
   }
