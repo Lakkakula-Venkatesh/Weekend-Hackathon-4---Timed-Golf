@@ -16,7 +16,7 @@ class Timer extends React.Component {
   componentDidMount() {
     document.addEventListener("keydown", this.handleKeyPress);
     setInterval(() => {
-      if (this.isOver()) {
+      if (this.state.isGameOver) {
         return;
       }
       this.setState({ time: this.state.startGame ? this.state.time + 1 : 0 });
@@ -31,7 +31,7 @@ class Timer extends React.Component {
   }
   handleKeyPress(event) {
     // 37: left, 38: up, 39: right, 40: down
-    if (this.state.isGameOver) {
+    if (this.isOver()) {
       return;
     }
     let { x, y } = this.state;
@@ -57,7 +57,11 @@ class Timer extends React.Component {
       }
     }
   }
-  componentWillUnmount() {}
+  componentWillUnmount() {
+    if(this.state.isGameOver) {
+      document.removeEventListener("keydown", this.handleKeyPress);
+    }
+  }
 
   render() {
     return (
